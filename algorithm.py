@@ -123,8 +123,9 @@ class Database:
 
         fileNameLength = data[seek]
         fileName = data[seek + 1:seek + fileNameLength + 1].decode('utf-8')
-        seek = fileNameLength + seek + structLength[3]
+        data = data[seek + fileNameLength + 1:]
 
+        seek = data.find(b"\x24")
         guidLength = data[seek]
         guid = data[seek + 1:seek + guidLength + 1].decode('utf-8')
         seek = guidLength + seek + structLength[4]
